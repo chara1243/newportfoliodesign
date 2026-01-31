@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Charan Bhattarai — Environmental Scientist</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --primary: #059669;      /* Emerald 600 */
+            --primary-dark: #064e3b; /* Emerald 900 */
+            --secondary: #78716c;    /* Stone 500 */
+            --accent: #d97706;       /* Amber 600 */
+            --bg: #fafaf9;           /* Stone 50 */
+            --surface: #ffffff;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: #1c1917;
+        }
+        
+        h1, h2, h3, .font-serif {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        /* Figma-style Components */
+        .card {
+            background: var(--surface);
+            border: 1px solid #e7e5e4;
+            border-radius: 12px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+        }
+        
+        .card:hover {
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+            transform: translateY(-2px);
+            border-color: #d6d3d1;
+        }
+        
+        /* Auto-layout spacing utility */
+        .auto-layout-col {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .auto-layout-row {
+            display: flex;
+            flex-direction: row;
+            gap: 1rem;
+            align-items: center;
+        }
+        
+        /* Smooth reveal animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Tag component (Figma style) */
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.25rem 0.75rem;
+            background-color: #ecfdf5;
+            color: #065f46;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            border: 1px solid #d1fae5;
+        }
+        
+        .tag-secondary {
+            background-color: #f5f5f4;
+            color: #57534e;
+            border-color: #e7e5e4;
+        }
+        
+        /* Timeline line */
+        .timeline-line {
+            position: absolute;
+            left: 24px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #e7e5e4;
+        }
+        
+        .timeline-dot {
+            position: absolute;
+            left: 20px;
+            width: 10px;
+            height: 10px;
+            background: var(--primary);
+            border-radius: 50%;
+            border: 2px solid white;
+            box-shadow: 0 0 0 2px var(--primary);
+        }
+        
+        /* Hover interactions */
+        .hover-lift {
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .hover-lift:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px -8px rgba(0,0,0,0.15);
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f5f5f4;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #d6d3d1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #a8a29e;
+        }
+        
+        /* Image mask for organic shapes */
+        .img-mask-organic {
+            border-radius: 1rem;
+            overflow: hidden;
+        }
+        
+        /* Skill bar */
+        .skill-bar-bg {
+            background: #e7e5e4;
+            height: 6px;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        
+        .skill-bar-fill {
+            background: var(--primary);
+            height: 100%;
+            border-radius: 3px;
+            transition: width 1s ease-out;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Navigation (Figma Auto-layout style) -->
+    <nav class="fixed top-0 w-full bg-white/80 backdrop-blur-md border-b border-stone-200 z-50 transition-all duration-300" id="navbar">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="font-serif text-2xl font-semibold text-emerald-900 tracking-tight">
+                CB.
+            </a>
+            
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium text-stone-600">
+                <a href="#about" class="hover:text-emerald-700 transition-colors">About</a>
+                <a href="#education" class="hover:text-emerald-700 transition-colors">Education</a>
+                <a href="#research" class="hover:text-emerald-700 transition-colors">Research</a>
+                <a href="#publications" class="hover:text-emerald-700 transition-colors">Publications</a>
+                <a href="#contact" class="px-5 py-2.5 bg-emerald-800 text-white rounded-full hover:bg-emerald-900 transition-all text-sm font-medium shadow-sm hover:shadow-md">
+                    Contact
+                </a>
+            </div>
+
+            <button class="md:hidden text-stone-600 hover:text-emerald-800" onclick="toggleMobileMenu()">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white border-t border-stone-200 px-6 py-6 space-y-4 absolute w-full shadow-lg">
+            <a href="#about" onclick="toggleMobileMenu()" class="block text-stone-700 font-medium">About</a>
+            <a href="#education" onclick="toggleMobileMenu()" class="block text-stone-700 font-medium">Education</a>
+            <a href="#research" onclick="toggleMobileMenu()" class="block text-stone-700 font-medium">Research</a>
+            <a href="#publications" onclick="toggleMobileMenu()" class="block text-stone-700 font-medium">Publications</a>
+            <a href="#contact" onclick="toggleMobileMenu()" class="block text-emerald-700 font-medium">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section (Figma Constraints: Hug/Fill) -->
+    <header class="pt-32 pb-20 px-6 max-w-6xl mx-auto">
+        <div class="grid md:grid-cols-12 gap-12 items-center">
+            
+            <!-- Text Content -->
+            <div class="md:col-span-7 space-y-6 reveal active">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 text-xs font-semibold tracking-wide uppercase border border-emerald-100">
+                    <span class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
+                    Available for Research Opportunities
+                </div>
+                
+                <h1 class="font-serif text-5xl md:text-7xl text-stone-900 leading-[1.1]">
+                    Charan <br>
+                    <span class="text-emerald-800 italic">Bhattarai</span>
+                </h1>
+                
+                <p class="text-xl text-stone-600 leading-relaxed max-w-lg">
+                    Environmental Science researcher specializing in air quality monitoring, water resource management, and climate change adaptation.
+                </p>
+                
+                <div class="auto-layout-row flex-wrap gap-4 pt-4">
+                    <a href="#research" class="px-6 py-3 bg-emerald-800 text-white rounded-lg font-medium hover:bg-emerald-900 transition-all shadow-md hover:shadow-lg flex items-center gap-2">
+                        View Research
+                        <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </a>
+                    <a href="mailto:cbhattarai54@gmail.com" class="px-6 py-3 bg-white text-stone-700 border border-stone-300 rounded-lg font-medium hover:border-emerald-600 hover:text-emerald-700 transition-all">
+                        Get in Touch
+                    </a>
+                </div>
+                
+                <div class="auto-layout-row gap-6 text-sm text-stone-500 pt-6 border-t border-stone-200">
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="map-pin" class="w-4 h-4"></i>
+                        Kathmandu, Nepal
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="graduation-cap" class="w-4 h-4"></i>
+                        MSc Environmental Science
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hero Image (Graduation Photo) -->
+            <div class="md:col-span-5 reveal active" style="transition-delay: 0.2s">
+                <div class="relative">
+                    <!-- Decorative elements (Figma absolute positioning) -->
+                    <div class="absolute -top-4 -right-4 w-24 h-24 bg-amber-100 rounded-full opacity-50 blur-2xl"></div>
+                    <div class="absolute -bottom-4 -left-4 w-32 h-32 bg-emerald-100 rounded-full opacity-50 blur-2xl"></div>
+                    
+                    <!-- Image Container -->
+                    <div class="relative img-mask-organic shadow-2xl border-4 border-white">
+                        <img src="images/graduation.jpg" 
+                             alt="Charan Bhattarai at Central Department of Environmental Science" 
+                             class="w-full h-auto object-cover aspect-[4/5] hover:scale-105 transition-transform duration-700"
+                             onerror="this.src='https://images.unsplash.com/photo-1544717305-2782549b5136?w=600&h=750&fit=crop'">
+                        
+                        <!-- Floating Badge -->
+                        <div class="absolute bottom-4 left-4 bg-white/95 backdrop-blur px-4 py-3 rounded-xl shadow-lg border border-stone-100 max-w-xs">
+                            <p class="text-xs text-stone-500 uppercase tracking-wider font-semibold">Current</p>
+                            <p class="text-sm font-medium text-stone-900">Research Assistant at TU</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white border-t border-stone-200">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                
+                <!-- About Image (Casual) -->
+                <div class="order-2 md:order-1 reveal">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="space-y-4 mt-8">
+                            <div class="card p-2">
+                                <img src="images/casual.jpg" alt="Field Work" class="w-full h-48 object-cover rounded-lg" onerror="this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop'">
+                            </div>
+                            <div class="card p-4 bg-emerald-50 border-emerald-100">
+                                <p class="font-serif text-3xl text-emerald-900 mb-1">8+</p>
+                                <p class="text-sm text-emerald-700">Research Projects</p>
+                            </div>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="card p-4 bg-amber-50 border-amber-100">
+                                <p class="font-serif text-3xl text-amber-900 mb-1">3</p>
+                                <p class="text-sm text-amber-700">Publications</p>
+                            </div>
+                            <div class="card p-2">
+                                <img src="images/lab.jpg" alt="Lab Work" class="w-full h-48 object-cover rounded-lg" onerror="this.src='https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=400&h=400&fit=crop'">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- About Text -->
+                <div class="order-1 md:order-2 space-y-6 reveal">
+                    <h2 class="font-serif text-4xl text-stone-900">About Me</h2>
+                    <div class="w-16 h-1 bg-emerald-600"></div>
+                    
+                    <p class="text-stone-600 leading-relaxed text-lg">
+                        A motivated Environmental Science graduate with a strong academic background from Tribhuvan University. I specialize in environmental data collection and analysis, with hands-on experience in air quality monitoring, water quality assessment, and geographic information systems (GIS).
+                    </p>
+                    
+                    <p class="text-stone-600 leading-relaxed">
+                        My research focuses on the intersection of household air pollution and public health, particularly investigating cooking practices and their impacts on indoor air quality. I'm passionate about translating scientific data into actionable policy recommendations for sustainable development.
+                    </p>
+
+                    <div class="flex flex-wrap gap-2 pt-4">
+                        <span class="tag">Air Quality Monitoring</span>
+                        <span class="tag">GIS Analysis</span>
+                        <span class="tag">Water Resources</span>
+                        <span class="tag">Climate Adaptation</span>
+                        <span class="tag">Research Design</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Timeline -->
+    <section id="education" class="py-20 px-6 max-w-6xl mx-auto">
+        <div class="mb-16 reveal">
+            <h2 class="font-serif text-4xl text-stone-900 mb-4">Education</h2>
+            <p class="text-stone-600 max-w-2xl">Academic foundation in Environmental Science with specialized training in climate change, disaster risk reduction, and environmental modeling.</p>
+        </div>
+
+        <div class="relative space-y-12">
+            <div class="timeline-line"></div>
+            
+            <!-- Masters -->
+            <div class="relative pl-16 reveal">
+                <div class="timeline-dot" style="top: 6px;"></div>
+                <div class="card p-6 md:p-8">
+                    <div class="flex flex-col md:flex-row md:justify-between md:items-start gap-4 mb-4">
+                        <div>
+                            <h3 class="font-serif text-2xl text-stone-900 mb-1">Master of Science in Environmental Science</h3>
+                            <p class="text-emerald-700 font-medium">Central Department of Environmental Science, Tribhuvan University</p>
+                        </div>
+                        <span class="tag-secondary whitespace-nowrap">2023 — 2025</span>
+                    </div>
+                    
+                    <p class="text-stone-600 mb-4 leading-relaxed">
+                        Specializing in air pollution monitoring and indoor air quality assessment. Thesis work on "Impact of Household Cooking Practices on Indoor Air Quality in Bagmati Province."
+                    </p>
+                    
+                    <div class="space-y-2">
+                        <p class="text-sm font-semibold text-stone-700 uppercase tracking-wider">Key Coursework:</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="tag-secondary">Environmental Chemistry</span>
+                            <span class="tag-secondary">Climate Change Science</span>
+                            <span class="tag-secondary">Disaster Risk Reduction (DRR)</span>
+                            <span class="tag-secondary">GIS & Remote Sensing</span>
+                            <span class="tag-secondary">Environmental Modeling</span>
+                            <span class="tag-secondary">Water Resources Management</span>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6 pt-6 border-t border-stone-100 flex items-center gap-2 text-amber-700 text-sm font-medium">
+                        <i data-lucide="award" class="w-4 h-4"></i>
+                        Honors: KCRE-CAS Excellent Student Grant, University of Eastern Finland Thesis Grant
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bachelors -->
+            <div class="relative pl-16 reveal">
+                <div class="timeline-dot" style="top: 6px; background: #d97706; box-shadow: 0 0 0 2px #d97706;"></div>
+                <div class="card p-6 md:p-8">
+                    <div class="flex flex-col md:flex-row md:justify-between md:items-start gap-4 mb-4">
+                        <div>
+                            <h3 class="font-serif text-2xl text-stone-900 mb-1">Bachelor of Science in Environmental Science</h3>
+                            <p class="text-amber-700 font-medium">Mechi Multiple Campus, Tribhuvan University</p>
+                        </div>
+                        <span class="tag-secondary whitespace-nowrap">2016 — 2020</span>
+                    </div>
+                    
+                    <p class="text-stone-600 leading-relaxed">
+                        Foundation in environmental biology, ecology, and conservation. Bachelor thesis on "Composition of Invasive Alien Plant Species in Irautar Community Forest."
+                    </p>
+                    
+                    <div class="mt-4 flex items-center gap-2 text-stone-500 text-sm">
+                        <i data-lucide="map-pin" class="w-4 h-4"></i>
+                        Bhadrapur, Jhapa, Nepal
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Research Projects (Figma Grid Layout) -->
+    <section id="research" class="py-20 bg-stone-50 border-t border-stone-200">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-12 reveal">
+                <div>
+                    <h2 class="font-serif text-4xl text-stone-900 mb-2">Research Projects</h2>
+                    <p class="text-stone-600">Selected field work and analytical projects</p>
+                </div>
+                <a href="#" class="hidden md:flex items-center gap-2 text-emerald-700 font-medium hover:gap-3 transition-all mt-4 md:mt-0">
+                    View All Projects <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </a>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                
+                <!-- Project 1: Indoor Air Quality (Featured) -->
+                <div class="md:col-span-2 card overflow-hidden group reveal">
+                    <div class="grid md:grid-cols-2">
+                        <div class="relative h-64 md:h-auto">
+                            <img src="images/conference.jpg" 
+                                 alt="Indoor Air Quality Research Presentation" 
+                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                 onerror="this.src='https://images.unsplash.com/photo-1475721027767-p428ed255067?w=800&h=600&fit=crop'">
+                            <div class="absolute top-4 left-4">
+                                <span class="bg-emerald-600 text-white px-3 py-1 rounded-full text-xs font-semibold">Ongoing</span>
+                            </div>
+                        </div>
+                        <div class="p-8 flex flex-col justify-center">
+                            <div class="flex items-center gap-2 text-xs text-stone-500 mb-3 uppercase tracking-wider">
+                                <i data-lucide="calendar" class="w-3 h-3"></i>
+                                June 2024 — Present
+                            </div>
+                            <h3 class="font-serif text-2xl text-stone-900 mb-3">Smoke-Free Homes Nepal</h3>
+                            <p class="text-stone-600 mb-4 leading-relaxed">
+                                Technological and socio-economic solutions to reduce indoor air pollution. Field monitoring using low-cost sensors and mid-volume samplers to assess PM2.5 exposure in rural households.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="tag">Air Quality</span>
+                                <span class="tag">Field Monitoring</span>
+                                <span class="tag">Public Health</span>
+                            </div>
+                            <div class="flex items-center gap-4 text-sm text-stone-600 border-t border-stone-100 pt-4">
+                                <span class="flex items-center gap-1">
+                                    <i data-lucide="user" class="w-4 h-4"></i>
+                                    Research Assistant
+                                </span>
+                                <span>•</span>
+                                <span>Data Analysis & Publication</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2: Phoksundo Lake -->
+                <div class="card overflow-hidden group reveal">
+                    <div class="aspect-video overflow-hidden">
+                        <img src="images/presentation.jpg" 
+                             alt="Water Quality Research" 
+                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                             onerror="this.src='https://images.unsplash.com/photo-1581093458791-9f3c3900df4b?w=600&h=400&fit=crop'">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-3">
+                            <span class="text-xs text-stone-500 uppercase tracking-wider">Sep 2024</span>
+                            <span class="tag">Published</span>
+                        </div>
+                        <h3 class="font-serif text-xl text-stone-900 mb-2">Hydrochemistry of Phoksundo Lake</h3>
+                        <p class="text-stone-600 text-sm leading-relaxed mb-4">
+                            Water quality assessment of higher Himalayan Ramsar site. Comprehensive hydrochemical analysis linking water parameters to SDG indicators.
+                        </p>
+                        <div class="flex items-center gap-2 text-emerald-700 text-sm font-medium">
+                            <i data-lucide="file-text" class="w-4 h-4"></i>
+                            Journal of Institute of Science and Technology
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3: Emission Inventory -->
+                <div class="card overflow-hidden group reveal">
+                    <div class="aspect-video overflow-hidden bg-slate-100 flex items-center justify-center">
+                        <div class="text-center p-8">
+                            <i data-lucide="bar-chart-2" class="w-12 h-12 text-slate-400 mx-auto mb-2"></i>
+                            <span class="text-slate-500 text-sm">World Bank Project</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-3">
+                            <span class="text-xs text-stone-500 uppercase tracking-wider">Jan 2024</span>
+                            <span class="tag-secondary">Consultancy</span>
+                        </div>
+                        <h3 class="font-serif text-xl text-stone-900 mb-2">Emission Inventory Project</h3>
+                        <p class="text-stone-600 text-sm leading-relaxed mb-4">
+                            Data collection and analysis for World Bank air quality management initiative in South Asia. Low-cost sensor network deployment.
+                        </p>
+                        <div class="flex items-center gap-2 text-stone-600 text-sm">
+                            <i data-lucide="building" class="w-4 h-4"></i>
+                            World Bank / ICIMOD
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 4: Melamchi Flood -->
+                <div class="card p-6 reveal">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-full bg-red-50 flex items-center justify-center text-red-600">
+                            <i data-lucide="waves" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-serif text-lg text-stone-900">Loss & Damage Finance Assessment</h3>
+                            <p class="text-xs text-stone-500">Melamchi Flood 2021 Case Study</p>
+                        </div>
+                    </div>
+                    <p class="text-stone-600 text-sm leading-relaxed mb-4">
+                        Locally-led assessment of climate-induced loss and damage finance mechanisms using KoboCollect toolbox and community surveys.
+                    </p>
+                    <div class="flex gap-2">
+                        <span class="tag-secondary">Disaster Risk</span>
+                        <span class="tag-secondary">Field Survey</span>
+                    </div>
+                </div>
+
+                <!-- Project 5: Solid Waste -->
+                <div class="card p-6 reveal">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-full bg-amber-50 flex items-center justify-center text-amber-600">
+                            <i data-lucide="trash-2" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-serif text-lg text-stone-900">Solid Waste Composition</h3>
+                            <p class="text-xs text-stone-500">Birtamode Municipality</p>
+                        </div>
+                    </div>
+                    <p class="text-stone-600 text-sm leading-relaxed mb-4">
+                        Characterization and quantification of municipal solid waste streams to inform waste management policy and recycling initiatives.
+                    </p>
+                    <div class="flex gap-2">
+                        <span class="tag-secondary">Waste Mgmt</span>
+                        <span class="tag-secondary">2018</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Publications -->
+    <section id="publications" class="py-20 px-6 max-w-6xl mx-auto">
+        <div class="mb-12 reveal">
+            <h2 class="font-serif text-4xl text-stone-900 mb-4">Publications</h2>
+            <div class="w-16 h-1 bg-emerald-600 mb-6"></div>
+        </div>
+
+        <div class="space-y-6">
+            <!-- Pub 1 -->
+            <div class="card p-6 md:p-8 hover-lift reveal group cursor-pointer" onclick="window.open('https://scholar.google.com/citations?user=voRs6eAAAAAJ', '_blank')">
+                <div class="flex flex-col md:flex-row gap-6">
+                    <div class="md:w-16 flex-shrink-0">
+                        <div class="w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center text-emerald-700 group-hover:bg-emerald-600 group-hover:text-white transition-colors">
+                            <span class="font-serif font-bold text-lg">01</span>
+                        </div>
+                    </div>
+                    <div class="flex-grow">
+                        <h3 class="font-serif text-xl text-stone-900 mb-2 group-hover:text-emerald-700 transition-colors">
+                            Hydrochemistry and Water Quality of Phoksundo Lake (Dolpa): Insights from the Higher Himalaya Ramsar Site of Nepal
+                        </h3>
+                        <p class="text-stone-600 text-sm mb-3">
+                            <span class="font-medium">Journal of Institute of Science and Technology</span>, Volume 30, Issue 1
+                        </p>
+                        <div class="flex items-center gap-4 text-xs text-stone-500 uppercase tracking-wider">
+                            <span class="flex items-center gap-1">
+                                <i data-lucide="flask-conical" class="w-3 h-3"></i>
+                                Water Quality
+                            </span>
+                            <span class="flex items-center gap-1">
+                                <i data-lucide="mountain" class="w-3 h-3"></i>
+                                Himalayan Ecology
+                            </span>
+                        </div>
+                    </div>
+                    <div class="md:w-8 flex items-center justify-center">
+                        <i data-lucide="external-link" class="w-5 h-5 text-stone-400 group-hover:text-emerald-600 transition-colors"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pub 2 -->
+            <div class="card p-6 md:p-8 hover-lift reveal group cursor-pointer">
+                <div class="flex flex-col md:flex-row gap-6">
+                    <div class="md:w-16 flex-shrink-0">
+                        <div class="w-12 h-12 bg-amber-100 rounded-lg flex items-center justify-center text-amber-700 group-hover:bg-amber-600 group-hover:text-white transition-colors">
+                            <span class="font-serif font-bold text-lg">02</span>
+                        </div>
+                    </div>
+                    <div class="flex-grow">
+                        <h3 class="font-serif text-xl text-stone-900 mb-2 group-hover:text-amber-700 transition-colors">
+                            Perception of Climate Change of Secondary Level Students in Mechinagar, Jhapa, Nepal
+                        </h3>
+                        <p class="text-stone-600 text-sm mb-3">
+                            <span class="font-medium">Perspectives on Higher Education</span> 15(01)
+                        </p>
+                        <div class="flex items-center gap-4 text-xs text-stone-500 uppercase tracking-wider">
+                            <span class="flex items-center gap-1">
+                                <i data-lucide="users" class="w-3 h-3"></i>
+                                Education Research
+                            </span>
+                            <span class="flex items-center gap-1">
+                                <i data-lucide="cloud-sun" class="w-3 h-3"></i>
+                                Climate Perception
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pub 3 -->
+            <div class="card p-6 md:p-8 hover-lift reveal group cursor-pointer">
+                <div class="flex flex-col md:flex-row gap-6">
+                    <div class="md:w-16 flex-shrink-0">
+                        <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center text-blue-700 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                            <span class="font-serif font-bold text-lg">03</span>
+                        </div>
+                    </div>
+                    <div class="flex-grow">
+                        <h3 class="font-serif text-xl text-stone-900 mb-2 group-hover:text-blue-700 transition-colors">
+                            Evaluation of Water Quality in Lowland Ramsar Wetlands: Insights on Hydrochemistry Analysis-Sustainable Development Goals Nexus
+                        </h3>
+                        <p class="text-stone-600 text-sm mb-3">
+                            <span class="font-medium">Physics and Chemistry of the Earth, Parts A/B/C</span>
+                        </p>
+                        <div class="flex items-center gap-4 text-xs text-stone-500 uppercase tracking-wider">
+                            <span class="flex items-center gap-1">
+                                <i data-lucide="droplets" class="w-3 h-3"></i>
+                                Wetland Ecology
+                            </span>
+                            <span class="flex items-center gap-1">
+                                <i data-lucide="globe" class="w-3 h-3"></i>
+                                SDGs
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-8 text-center">
+            <a href="https://scholar.google.com/citations?user=voRs6eAAAAAJ" target="_blank" class="inline-flex items-center gap-2 text-emerald-700 font-medium hover:gap-3 transition-all border-b-2 border-emerald-200 hover:border-emerald-600 pb-1">
+                View Google Scholar Profile <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Skills & Tools (Figma Component Style) -->
+    <section class="py-20 bg-stone-100 border-t border-stone-200">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-16">
+                
+                <!-- Technical Skills -->
+                <div class="reveal">
+                    <h2 class="font-serif text-3xl text-stone-900 mb-8">Technical Skills</h2>
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium text-stone-700">GIS & Remote Sensing</span>
+                                <span class="text-sm text-stone-500">Advanced</span>
+                            </div>
+                            <div class="skill-bar-bg">
+                                <div class="skill-bar-fill" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium text-stone-700">R Programming</span>
+                                <span class="text-sm text-stone-500">Advanced</span>
+                            </div>
+                            <div class="skill-bar-bg">
+                                <div class="skill-bar-fill" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium text-stone-700">MS Excel / Data Analysis</span>
+                                <span class="text-sm text-stone-500">Advanced</span>
+                            </div>
+                            <div class="skill-bar-bg">
+                                <div class="skill-bar-fill" style="width: 88%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium text-stone-700">Python (Basic)</span>
+                                <span class="text-sm text-stone-500">Intermediate</span>
+                            </div>
+                            <div class="skill-bar-bg">
+                                <div class="skill-bar-fill" style="width: 60%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8">
+                        <h3 class="font-semibold text-stone-900 mb-4">Specialized Equipment</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="tag-secondary">Air Pollution High Volume Sampler</span>
+                            <span class="tag-secondary">Mid-Volume Sampler</span>
+                            <span class="tag-secondary">Low-Cost Sensors</span>
+                            <span class="tag-secondary">Water Quality Probes</span>
+                            <span class="tag-secondary">Laboratory Analysis</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Certifications -->
+                <div class="reveal">
+                    <h2 class="font-serif text-3xl text-stone-900 mb-8">Certifications</h2>
+                    
+                    <div class="space-y-4">
+                        <div class="card p-4 flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center flex-shrink-0 text-orange-600">
+                                <i data-lucide="brain" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-stone-900">Elsevier AI Certifications</h4>
+                                <p class="text-sm text-stone-600">Foundations of AI, Benefits & Risks, Responsible AI</p>
+                            </div>
+                        </div>
+                        
+                        <div class="card p-4 flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0 text-blue-600">
+                                <i data-lucide="plane" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-stone-900">MDPI Drones for Natural Hazards</h4>
+                                <p class="text-sm text-stone-600">Remote sensing applications in disaster management</p>
+                            </div>
+                        </div>
+                        
+                        <div class="card p-4 flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0 text-green-600">
+                                <i data-lucide="wind" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-stone-900">USAID Clean Air</h4>
+                                <p class="text-sm text-stone-600">Air Quality Management for Kathmandu Valley</p>
+                            </div>
+                        </div>
+                        
+                        <div class="card p-4 flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center flex-shrink-0 text-purple-600">
+                                <i data-lucide="presentation" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-stone-900">Conference Participation</h4>
+                                <p class="text-sm text-stone-600">International Conference on Entomology, 10th Graduate Conference 2024 (Himalayan Knowledge)</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 p-6 bg-emerald-800 text-white rounded-xl">
+                        <h3 class="font-serif text-xl mb-2">JENESYS SAARC 2025</h3>
+                        <p class="text-emerald-100 text-sm mb-4">Selected Participant from Nepal</p>
+                        <div class="flex items-center gap-2 text-xs text-emerald-200 uppercase tracking-wider">
+                            <i data-lucide="globe-2" class="w-4 h-4"></i>
+                            International Exchange Program
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 px-6 bg-emerald-900 text-white relative overflow-hidden">
+        <!-- Background decoration -->
+        <div class="absolute top-0 right-0 w-96 h-96 bg-emerald-800 rounded-full blur-3xl opacity-50 -translate-y-1/2 translate-x-1/2"></div>
+        <div class="absolute bottom-0 left-0 w-64 h-64 bg-amber-900 rounded-full blur-3xl opacity-30 translate-y-1/2 -translate-x-1/2"></div>
+        
+        <div class="max-w-4xl mx-auto text-center relative z-10 reveal">
+            <h2 class="font-serif text-4xl md:text-5xl mb-6">Let's collaborate</h2>
+            <p class="text-emerald-100 text-lg mb-10 max-w-2xl mx-auto">
+                Open for research collaborations, environmental consultancy projects, and academic opportunities in air quality and climate adaptation research.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row justify-center gap-4 mb-12">
+                <a href="mailto:cbhattarai54@gmail.com" class="px-8 py-4 bg-white text-emerald-900 rounded-lg font-semibold hover:bg-emerald-50 transition-colors shadow-lg flex items-center justify-center gap-2">
+                    <i data-lucide="mail" class="w-5 h-5"></i>
+                    cbhattarai54@gmail.com
+                </a>
+                <a href="http://www.charanbhattarai.com.np" target="_blank" class="px-8 py-4 bg-emerald-800 text-white border border-emerald-700 rounded-lg font-semibold hover:bg-emerald-700 transition-colors flex items-center justify-center gap-2">
+                    <i data-lucide="globe" class="w-5 h-5"></i>
+                    Visit Website
+                </a>
+            </div>
+
+            <div class="flex justify-center gap-8 pt-8 border-t border-emerald-800">
+                <a href="https://scholar.google.com/citations?user=voRs6eAAAAAJ" target="_blank" class="text-emerald-200 hover:text-white transition-colors">
+                    <span class="sr-only">Google Scholar</span>
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 24a7 7 0 1 1 0-14 7 7 0 0 1 0 14Zm0-24L0 9.5l4.838 3.94A8 8 0 0 1 12 9a8 8 0 0 1 7.162 4.44L24 9.5 12 0Z"/></svg>
+                </a>
+                <a href="#" class="text-emerald-200 hover:text-white transition-colors">
+                    <i data-lucide="linkedin" class="w-6 h-6"></i>
+                </a>
+                <a href="#" class="text-emerald-200 hover:text-white transition-colors">
+                    <i data-lucide="twitter" class="w-6 h-6"></i>
+                </a>
+                <a href="#" class="text-emerald-200 hover:text-white transition-colors">
+                    <i data-lucide="instagram" class="w-6 h-6"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-8 px-6 bg-emerald-950 text-emerald-400 text-sm text-center border-t border-emerald-900">
+        <p>&copy; 2024 Charan Bhattarai. Crafted with precision.</p>
+    </footer>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Scroll reveal animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+
+        // Animate skill bars on scroll
+        const skillObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const fills = entry.target.querySelectorAll('.skill-bar-fill');
+                    fills.forEach(fill => {
+                        const width = fill.style.width;
+                        fill.style.width = '0';
+                        setTimeout(() => {
+                            fill.style.width = width;
+                        }, 100);
+                    });
+                }
+            });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll('.skill-bar-bg').forEach((el) => {
+            skillObserver.observe(el.parentElement);
+        });
+
+        // Navbar background on scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('shadow-md');
+            } else {
+                nav.classList.remove('shadow-md');
+            }
+        });
+    </script>
+</body>
+</html>
